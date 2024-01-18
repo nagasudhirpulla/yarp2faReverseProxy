@@ -1,7 +1,23 @@
+using Application;
+using Application.Common;
+using Application.Users.Commands.SeedUsers;
+using Infra;
+using MediatR;
+using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using System.Configuration;
+using WebApp.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration, builder.Environment);
+builder.Services.AddRazorPages()
+    .AddMvcOptions(o => o.Filters.Add(new AuthorizeFilter()))
+    .AddRazorRuntimeCompilation();
 
 var app = builder.Build();
 
@@ -13,13 +29,24 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
 
+SeedData(app).Wait();
+
 app.Run();
+
+static async Task SeedData(WebApplication app)
+{
+    using var scope = app.Services.CreateScope();
+    var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+    _ = await mediator.Send(new SeedUsersCommand());
+}
