@@ -16,13 +16,15 @@ public class SendCodeModel : PageModel
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly ILogger<SendCodeModel> _logger;
     private readonly IEmailSender _emailSender;
+    private readonly string _appName;
 
-    public SendCodeModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, ILogger<SendCodeModel> logger)
+    public SendCodeModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, ILogger<SendCodeModel> logger, IConfiguration configuration)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _emailSender = emailSender;
         _logger = logger;
+        _appName = configuration["AppName"];
     }
 
     public bool RememberMe { get; set; }
@@ -82,10 +84,10 @@ public class SendCodeModel : PageModel
             throw new InvalidOperationException($"Unable to generate login code for two factor authentication via {Input.Provider}");
         }
 
-        var message = "Hi, Your security code to login into WRLDC dashboard portal is " + code;
+        var message = $"Hi, Your security code to login into {_appName} is " + code;
         if (Input.Provider == "Email")
         {
-            await _emailSender.SendEmailAsync(await _userManager.GetEmailAsync(user), "Security Code to login into WRLDC dashboard portal", message);
+            await _emailSender.SendEmailAsync(await _userManager.GetEmailAsync(user), $"Security Code to login into {_appName}", message);
         }
 
         return RedirectToPage("./VerifyCode", new { Provider = Input.Provider, ReturnUrl = returnUrl, RememberMe = rememberMe });

@@ -4,9 +4,11 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>5212a3fe-58e9-4752-84b9-2e332687eb17</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Include="wwwroot\js\node_modules\%40fortawesome\fontawesome-free\css\fontawesome.min.css" />
 	  <Content Include="wwwroot\js\node_modules\bootstrap\dist\css\bootstrap.min.css" />
 	</ItemGroup>
 

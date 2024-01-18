@@ -22,13 +22,15 @@ public class LoginModel : PageModel
     private readonly IEmailSender _emailSender;
     private readonly IDNTCaptchaValidatorService _validatorService;
     private readonly DNTCaptchaOptions _captchaOptions;
+    private readonly string _appName;
 
     public LoginModel(SignInManager<ApplicationUser> signInManager,
         ILogger<LoginModel> logger,
         UserManager<ApplicationUser> userManager,
         IEmailSender emailSender,
         IDNTCaptchaValidatorService validatorService,
-        IOptions<DNTCaptchaOptions> options)
+        IOptions<DNTCaptchaOptions> options,
+        IConfiguration configuration)
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -36,6 +38,7 @@ public class LoginModel : PageModel
         _logger = logger;
         _validatorService = validatorService;
         _captchaOptions = options == null ? throw new ArgumentNullException(nameof(options)) : options.Value;
+        _appName = configuration["AppName"];
     }
 
     [BindProperty]
@@ -178,8 +181,8 @@ public class LoginModel : PageModel
             protocol: Request.Scheme);
         await _emailSender.SendEmailAsync(
             Input.Username,
-            "Confirm your email",
-            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+            $"Confirm your email for {_appName}",
+            $"Please confirm your account in {_appName} by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
         ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
         return Page();

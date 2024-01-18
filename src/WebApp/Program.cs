@@ -15,6 +15,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration, builder.Environment);
+builder.Services.AddControllers();
 builder.Services.AddRazorPages()
     .AddMvcOptions(o => o.Filters.Add(new AuthorizeFilter()))
     .AddRazorRuntimeCompilation();
@@ -39,6 +40,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 
 SeedData(app).Wait();
 

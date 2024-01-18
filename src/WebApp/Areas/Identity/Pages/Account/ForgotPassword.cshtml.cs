@@ -16,11 +16,13 @@ public class ForgotPasswordModel : PageModel
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IEmailSender _emailSender;
+    private readonly string _appName;
 
-    public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+    public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender, IConfiguration configuration)
     {
         _userManager = userManager;
         _emailSender = emailSender;
+        _appName = configuration["AppName"];
     }
 
     [BindProperty]
@@ -56,8 +58,8 @@ public class ForgotPasswordModel : PageModel
 
             await _emailSender.SendEmailAsync(
                 Input.Email,
-                "Reset Password of WRLDC Dashboard Portal",
-                $"Hi, Please reset your password of WRLDC Dashboard Portal by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                $"Reset Password of {_appName}",
+                $"Hi, Please reset your password of {_appName} by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
             return RedirectToPage("./ForgotPasswordConfirmation");
         }

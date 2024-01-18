@@ -19,11 +19,11 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
     {
-        if (environment.IsEnvironment("Testing"))
+        if (environment.IsEnvironment("Development"))
         {
             // Add Persistence Infra
             services.AddDbContext<AppDbContext>(options =>
-                options.UseInMemoryDatabase(databaseName: "HrisDb"));
+                options.UseInMemoryDatabase(databaseName: "ReverseProxyGatewayDb"));
 
         }
         else

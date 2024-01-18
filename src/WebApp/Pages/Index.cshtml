@@ -1,10 +1,12 @@
 ﻿@page
 @model IndexModel
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
 @{
     ViewData["Title"] = "Home page";
+    string? appName = Configuration["AppName"];
 }
 
 <div class="text-center">
-    <h1 class="display-4"><b>Welcome to SCED WRLDC Portal</b></h1>
-    @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+    <h1 class="display-4"><b>Welcome to @appName</b></h1>
 </div>
