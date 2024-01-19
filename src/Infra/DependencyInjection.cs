@@ -22,8 +22,10 @@ public static class DependencyInjection
         if (environment.IsEnvironment("Development"))
         {
             // Add Persistence Infra
+            //services.AddDbContext<AppDbContext>(options =>
+            //    options.UseInMemoryDatabase(databaseName: "ReverseProxyGatewayDb"));
             services.AddDbContext<AppDbContext>(options =>
-                options.UseInMemoryDatabase(databaseName: "ReverseProxyGatewayDb"));
+                options.UseSqlite("Data Source=./AppDb.sqlite"));
 
         }
         else
@@ -60,7 +62,7 @@ public static class DependencyInjection
             options.AccessDeniedPath = "/Identity/Account/AccessDenied";
             options.SlidingExpiration = true;
             options.ExpireTimeSpan = TimeSpan.FromHours(2);
-            options.Cookie.Name = "HrisWebAppCookie";
+            options.Cookie.Name = "AppCookie";
             options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
             options.Cookie.HttpOnly = true;
         });

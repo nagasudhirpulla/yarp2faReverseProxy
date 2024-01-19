@@ -20,6 +20,11 @@ builder.Services.AddRazorPages()
     .AddMvcOptions(o => o.Filters.Add(new AuthorizeFilter()))
     .AddRazorRuntimeCompilation();
 
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("gatewayAccess", policy => policy.RequireAuthenticatedUser());
+
+builder.Services.AddReverseProxy().LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,6 +44,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapReverseProxy();
 app.MapRazorPages();
 app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 

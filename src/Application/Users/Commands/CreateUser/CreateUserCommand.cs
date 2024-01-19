@@ -10,6 +10,6 @@ public class CreateUserCommand : IRequest<IdentityResult>
     public string PhoneNumber { get; set; }
     public string Password { get; set; }
     public string ConfirmPassword { get; set; }
-    public bool IsTwoFactorEnabled { get; set; }
+    public bool IsTwoFactorEnabled { get; set; } = true;
     public string UserRole { get; set; }
 }
