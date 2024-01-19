@@ -32,6 +32,7 @@ public class CreateModel : PageModel
 
     public async Task OnGetAsync()
     {
+        NewUser = new();
         await InitSelectListItems();
     }
 

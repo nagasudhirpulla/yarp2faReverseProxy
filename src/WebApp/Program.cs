@@ -3,9 +3,7 @@ using Application.Common;
 using Application.Users.Commands.SeedUsers;
 using Infra;
 using MediatR;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using System.Configuration;
 using WebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
