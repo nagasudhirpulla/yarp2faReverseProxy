@@ -9,12 +9,12 @@ namespace Application.Users.Commands.EditUser;
 public class EditUserCommand : IRequest<List<string>>, IMapFrom<UserDTO>
 {
     public string Id { get; set; }
-    public string Username { get; set; }
-    public string Email { get; set; }
-    public string PhoneNumber { get; set; }
-    public string Password { get; set; }
-    public string ConfirmPassword { get; set; }
-    public string UserRole { get; set; }
+    public string Username { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string? PhoneNumber { get; set; }
+    public string? Password { get; set; }
+    public string? ConfirmPassword { get; set; }
+    public string UserRole { get; set; } = SecurityConstants.GuestRoleString;
     public bool IsTwoFactorEnabled { get; set; }
 
     public void Mapping(Profile profile)
