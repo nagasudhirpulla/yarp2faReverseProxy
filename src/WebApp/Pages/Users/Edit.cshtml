@@ -7,7 +7,7 @@
 <div class="row justify-content-center align-items-center">
     <div class="col col-md-4 col-lg-4 col-xl-3">
         <h2>@ViewData["Title"]</h2>
-        <form asp-action="Edit">
+        <form method="post">
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <input asp-for="UpUser.Id" type="hidden" />
