@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "Infra": {
+      "commandName": "Project"
+    }
+  }
+}
