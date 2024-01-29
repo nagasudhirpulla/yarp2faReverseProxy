@@ -16,6 +16,8 @@
     "datatables.net-dt": "^1.10.22",
     "datatables.net-fixedheader": "^3.2.1",
     "jquery": "^3.5.1",
+    "jquery-validation": "1.17.0",
+    "jquery-validation-unobtrusive": "3.2.9",
     "jszip": "^3.5.0",
     "pdfmake": "^0.1.68",
     "startbootstrap-sb-admin-2": "^4.1.1"
