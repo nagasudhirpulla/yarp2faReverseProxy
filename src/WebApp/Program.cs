@@ -42,8 +42,8 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapReverseProxy();
 app.MapRazorPages();
+app.MapReverseProxy();
 app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 
 SeedData(app).Wait();

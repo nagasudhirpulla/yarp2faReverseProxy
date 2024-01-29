@@ -8,6 +8,10 @@
 *.userosscache
 *.sln.docstates
 node_modules/
+src/WebApp/wwwroot/*.png
+src/WebApp/wwwroot/*.json
+src/WebApp/wwwroot/*.html
+src/WebApp/wwwroot/static/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
