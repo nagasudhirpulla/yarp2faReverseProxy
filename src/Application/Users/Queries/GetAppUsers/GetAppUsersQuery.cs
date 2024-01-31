@@ -38,14 +38,9 @@ public class GetAppUsersQuery : IRequest<UserListVM>
                 if (!isSuperAdmin)
                 {
                     // add user to vm only if not admin
-                    string userRole = "";
                     IList<string> existingRoles = await _userManager.GetRolesAsync(user);
-                    if (existingRoles.Count > 0)
-                    {
-                        userRole = existingRoles.ElementAt(0);
-                    }
                     UserDTO uDTO = _mapper.Map<UserDTO>(user);
-                    uDTO.UserRole = userRole;
+                    uDTO.UserRoles = existingRoles.ToList();
                     vm.Users.Add(uDTO);
                 }
 

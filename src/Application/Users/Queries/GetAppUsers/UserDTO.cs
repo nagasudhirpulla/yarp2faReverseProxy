@@ -9,7 +9,7 @@ public class UserDTO : IMapFrom<ApplicationUser>
     public string UserId { get; set; }
     public string Username { get; set; }
     public string Email { get; set; }
-    public string UserRole { get; set; }
+    public List<string> UserRoles { get; set; } = [];
     public bool IsTwoFactorEnabled { get; set; } = false;
     public string PhoneNumber { get; set; }
     public void Mapping(Profile profile)

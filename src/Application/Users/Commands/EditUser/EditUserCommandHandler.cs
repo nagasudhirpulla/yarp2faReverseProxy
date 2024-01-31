@@ -86,20 +86,20 @@ public class EditUserCommandHandler : IRequestHandler<EditUserCommand, List<stri
             }
         }
 
-        // change user role if not present in user
-        bool isValidRole = SecurityConstants.GetRoles().Contains(request.UserRole);
-        List<string> existingUserRoles = (await _userManager.GetRolesAsync(user)).ToList();
-        bool isRoleChanged = !existingUserRoles.Any(r => r == request.UserRole);
-        if (isValidRole)
-        {
-            if (isRoleChanged)
-            {
-                // remove existing user roles if any
-                await _userManager.RemoveFromRolesAsync(user, existingUserRoles);
-                // add new Role to user from VM
-                await _userManager.AddToRoleAsync(user, request.UserRole);
-            }
-        }
+        //// change user role if not present in user
+        //bool isValidRole = SecurityConstants.GetRoles().Contains(request.UserRole);
+        //List<string> existingUserRoles = (await _userManager.GetRolesAsync(user)).ToList();
+        //bool isRoleChanged = !existingUserRoles.Any(r => r == request.UserRole);
+        //if (isValidRole)
+        //{
+        //    if (isRoleChanged)
+        //    {
+        //        // remove existing user roles if any
+        //        await _userManager.RemoveFromRolesAsync(user, existingUserRoles);
+        //        // add new Role to user from VM
+        //        await _userManager.AddToRoleAsync(user, request.UserRole);
+        //    }
+        //}
 
         // check if two factor authentication to be changed
         if (user.TwoFactorEnabled != request.IsTwoFactorEnabled)
