@@ -35,13 +35,8 @@ public class GetUserByIdQuery : IRequest<UserDTO>
             }
 
             IList<string> existingUserRoles = (await _userManager.GetRolesAsync(user));
-            string userRole = SecurityConstants.GuestRoleString;
-            if (existingUserRoles.Count > 0)
-            {
-                userRole = existingUserRoles.ElementAt(0);
-            }
             UserDTO vm = _mapper.Map<UserDTO>(user);
-            vm.UserRole = userRole;
+            vm.UserRoles = existingUserRoles.ToList();
             return vm;
         }
     }
