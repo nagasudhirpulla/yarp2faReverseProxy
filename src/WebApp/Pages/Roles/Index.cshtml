@@ -1,0 +1,40 @@
+﻿@page
+@model WebApp.Pages.Roles.IndexModel
+@{
+    ViewData["Title"] = "Manage Roles";
+}
+
+@if (Model != null && Model.UserRoles != null)
+{
+    <div class="row justify-content-center align-items-center">
+        <div class="col col-md-12">
+            <h2>@ViewData["Title"]</h2>
+            <hr />
+            <table class="table table-bordered table-hover display" id="roles_table">
+                <thead>
+                    <tr>
+                        <th>Role Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var role in Model.UserRoles)
+                    {
+                        <tr>
+                            <td>@role.Name</td>
+                            <td>
+                                @* <a asp-page="./Delete" asp-route-id="@role.Id">Delete</a> *@
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <br />
+            <p>
+                @* <a asp-page="./Create">Create Role</a> *@
+            </p>
+        </div>
+
+    </div>
+}

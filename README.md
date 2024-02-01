@@ -7,4 +7,5 @@
 * Delete role page, restrict deletion if users are linked or roles are mentioned in SecurityConstants class
 
 ## Links
+* Manage roles in dotnet - https://csharp-video-tutorials.blogspot.com/2019/07/get-list-of-roles-in-aspnet-core.html
 * Configure policy based role checks - https://learn.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-8.0#policy-based-role-checks
