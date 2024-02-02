@@ -1,5 +1,4 @@
 using Application.UserRoles.Commands.CreateUserRole;
-using Application.Users.Commands.CreateUser;
 using FluentValidation.AspNetCore;
 using FluentValidation.Results;
 using MediatR;

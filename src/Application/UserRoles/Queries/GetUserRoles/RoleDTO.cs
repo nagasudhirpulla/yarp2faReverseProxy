@@ -1,7 +1,16 @@
-﻿namespace Application.UserRoles.Queries.GetUserRoles;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using static Application.Common.Mappings.MappingProfile;
 
-public class RoleDTO
+namespace Application.UserRoles.Queries.GetUserRoles;
+
+public class RoleDTO : IMapFrom<IdentityRole>
 {
     public string Id { get; set; } = string.Empty;
     public string? Name { get; set; }
+
+    public void Mapping(Profile profile)
+    {
+        profile.CreateMap<IdentityRole, RoleDTO>();
+    }
 }

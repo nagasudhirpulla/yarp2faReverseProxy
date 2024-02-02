@@ -1,7 +1,4 @@
-﻿using Application.Users.Commands.CreateUser;
-using Application.Users;
-using Core.Entities;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace Application.UserRoles.Commands.CreateUserRole;
 
