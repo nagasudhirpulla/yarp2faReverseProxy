@@ -1,10 +1,8 @@
 ## TODOs
 * show roles list in user edit page with delete button that redirects to delete user role page and add user role button that redirects user to add user role page
+* rename role page
 * add user role page
-* delete user role page, after removing role from user
-* List roles page
-* Add role page
-* Delete role page, restrict deletion if users are linked or roles are mentioned in SecurityConstants class
+* delete user role page
 
 ## Links
 * Manage roles in dotnet - https://csharp-video-tutorials.blogspot.com/2019/07/get-list-of-roles-in-aspnet-core.html
