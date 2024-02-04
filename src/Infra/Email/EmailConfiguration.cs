@@ -7,4 +7,6 @@ public class EmailConfiguration
     public string Domain { get; set; } = string.Empty;
     public string MailAddress { get; set; } = string.Empty;
     public string HostName { get; set; } = string.Empty;
+    public int Port { get; set; } = 25;
+    public bool EnableSsl { get; set; } = false;
 }

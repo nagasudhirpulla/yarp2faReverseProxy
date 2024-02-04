@@ -12,6 +12,7 @@ src/WebApp/wwwroot/*.png
 src/WebApp/wwwroot/*.json
 src/WebApp/wwwroot/*.html
 src/WebApp/wwwroot/static/
+AppDb.*
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

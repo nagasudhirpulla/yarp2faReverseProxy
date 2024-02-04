@@ -38,10 +38,11 @@ public class EmailSender : IEmailSender
         using (var smtpClient = new SmtpClient())
         {
             smtpClient.Host = _emailConfig.HostName;
-            smtpClient.Port = 587;
+            smtpClient.Port = _emailConfig.Port;
             smtpClient.UseDefaultCredentials = false;
             smtpClient.Credentials = new NetworkCredential(_emailConfig.Username, _emailConfig.Password, _emailConfig.Domain);
             smtpClient.Timeout = (60 * 5 * 1000);
+            smtpClient.EnableSsl = _emailConfig.EnableSsl;
             await smtpClient.SendMailAsync(message);
         }
 
