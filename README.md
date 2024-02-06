@@ -1,6 +1,5 @@
 ## TODOs
 * show roles list in user edit page with delete button that redirects to delete user role page and add user role button that redirects user to add user role page
-* rename role page
 * add user role page
 * delete user role page
 
