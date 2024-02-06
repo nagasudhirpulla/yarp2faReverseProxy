@@ -1,0 +1,27 @@
+﻿@page
+@model WebApp.Pages.Roles.EditModel
+@{
+    ViewData["Title"] = "Edit Role";
+}
+
+<div class="row justify-content-center align-items-center">
+    <div class="col col-md-4 col-lg-4 col-xl-3">
+        <h2>@ViewData["Title"]</h2>
+        <form method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="UserRole.Id" type="hidden" />
+            <div class="form-group">
+                <label asp-for="UserRole.Name"></label>
+                <input asp-for="UserRole.Name" class="form-control" />
+                <span asp-validation-for="UserRole.Name" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-success">Save Changes</button>
+        </form>
+        <a asp-page="/Roles/Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
