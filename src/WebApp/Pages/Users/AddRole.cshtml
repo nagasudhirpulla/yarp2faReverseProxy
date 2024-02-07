@@ -20,7 +20,7 @@
 
             <button type="submit" class="btn btn-success">Add Role</button>
         </form>
-        <a asp-page="./Details">Back to User Details</a>
+        <a asp-page="./Details" asp-route-id="@Model.AddRoleCmd.UserId">Back to User Details</a>
     </div>
 </div>
 

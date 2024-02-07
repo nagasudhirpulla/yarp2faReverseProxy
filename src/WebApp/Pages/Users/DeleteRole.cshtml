@@ -1,0 +1,29 @@
+﻿@page
+@model WebApp.Pages.Users.DeleteRoleModel
+@{
+    ViewData["Title"] = "Remove Role from User";
+}
+
+<div class="row justify-content-center align-items-center">
+    <div class="col col-md-4 col-lg-4 col-xl-3">
+        <h2>Remove role from the user @Model.Username</h2>
+        <form method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="@Model.DeleteRoleCmd.UserId" type="hidden" />
+            <input asp-for="@Model.Username" type="hidden" />
+            <div class="form-group">
+                <label asp-for="DeleteRoleCmd.RoleName"></label>
+                <select asp-for="DeleteRoleCmd.RoleName" class="form-control" asp-items="Model.URoles"></select>
+                <span asp-validation-for="DeleteRoleCmd.RoleName" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-danger">Remove Role</button>
+        </form>
+        <a asp-page="./Details" asp-route-id="@Model.DeleteRoleCmd.UserId">Back to User Details</a>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
