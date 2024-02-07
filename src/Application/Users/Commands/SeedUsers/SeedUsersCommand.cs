@@ -57,7 +57,7 @@ public class SeedUsersCommand : IRequest<bool>
                 {
                     UserName = userName,
                     Email = email,
-                    TwoFactorEnabled = role == SecurityConstants.AdminRoleString ? true : false
+                    TwoFactorEnabled = role == SecurityConstants.AdminRoleString
                 };
 
                 // push desired user object to DB

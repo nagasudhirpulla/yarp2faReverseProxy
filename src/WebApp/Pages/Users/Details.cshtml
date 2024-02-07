@@ -21,7 +21,16 @@
     </tr>
     <tr>
         <td>Role</td>
-        <td>@string.Join(", ", Model.CUser.UserRoles)</td>
+        <td>
+            @* @string.Join(", ", Model.CUser.UserRoles) *@
+            <ul>
+                @foreach (var roleName in Model.CUser.UserRoles)
+                {
+                    <li>@roleName</li>
+                }
+            </ul>
+            <a asp-page="./AddRole" asp-route-id="@Model.CUser.UserId">Add Role to User</a>
+        </td>
     </tr>
     <tr>
         <td>Two Factor</td>
