@@ -1,7 +1,7 @@
 using Application.Common;
-using Application.UserRoles.Queries.GetUserRoles;
 using Application.Users.Commands.DeleteRoleFromUser;
 using Application.Users.Queries.GetAppUsers;
+using Application.Users.Queries.GetRolesOfUser;
 using Application.Users.Queries.GetUserById;
 using FluentValidation.AspNetCore;
 using FluentValidation.Results;
@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using WebApp.Extensions;
 
 namespace WebApp.Pages.Users;
@@ -34,18 +35,29 @@ public class DeleteRoleModel(ILogger<DeleteRoleModel> logger, IMediator mediator
         {
             return NotFound();
         }
+
+        await InitSelectListItems(id);
+
+        if (!URoles.Any())
+        {
+            return NotFound();
+        }
+
         Username = usr.Username;
 
         DeleteRoleCmd = new DeleteRoleFromUserCommand() { UserId = id };
-
-        await InitSelectListItems();
 
         return Page();
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        await InitSelectListItems();
+        await InitSelectListItems(DeleteRoleCmd.UserId);
+
+        if (!URoles.Any())
+        {
+            return NotFound();
+        }
 
         ValidationResult validationCheck = new DeleteRoleFromUserCommandValidator().Validate(DeleteRoleCmd);
         validationCheck.AddToModelState(ModelState, nameof(DeleteRoleCmd));
@@ -72,11 +84,11 @@ public class DeleteRoleModel(ILogger<DeleteRoleModel> logger, IMediator mediator
         return Page();
     }
 
-    public async Task InitSelectListItems()
+    public async Task InitSelectListItems(string userId)
     {
-        // get all the roles
-        List<RoleDTO> roles = await _mediator.Send(new GetUserRolesQuery());
-        URoles = new SelectList(roles.Select(r => r.Name));
+        // get all the roles of the user
+        List<string> roles = await _mediator.Send(new GetRolesOfUserQuery() { Id = userId });
+        URoles = new SelectList(roles);
     }
 }
 
