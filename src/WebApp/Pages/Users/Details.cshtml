@@ -20,17 +20,14 @@
         <td>@Model.CUser.PhoneNumber</td>
     </tr>
     <tr>
-        <td>Role</td>
+        <td>Roles</td>
         <td>
-            @* @string.Join(", ", Model.CUser.UserRoles) *@
             <ul>
                 @foreach (var roleName in Model.CUser.UserRoles)
                 {
                     <li>@roleName</li>
                 }
             </ul>
-            <a asp-page="./AddRole" asp-route-id="@Model.CUser.UserId">Add Role to User</a>
-            <a asp-page="./DeleteRole" asp-route-id="@Model.CUser.UserId">Remove Role from User</a>
         </td>
     </tr>
     <tr>

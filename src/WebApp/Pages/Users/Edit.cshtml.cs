@@ -5,12 +5,12 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Application.Users;
 using Application.Users.Commands.EditUser;
 using Application.Users.Queries.GetRawUserById;
 using Core.Entities;
 using WebApp.Extensions;
+using Application.Users.Queries.GetRolesOfUser;
 
 namespace WebApp.Pages.Users;
 
@@ -31,7 +31,7 @@ public class EditModel : PageModel
     [BindProperty]
     public EditUserCommand UpUser { get; set; }
 
-    public SelectList URoles { get; set; }
+    public List<string> URoles { get; set; }
 
     public async Task<IActionResult> OnGetAsync(string id)
     {
@@ -48,14 +48,14 @@ public class EditModel : PageModel
 
         UpUser = _mapper.Map<EditUserCommand>(user);
 
-        InitSelectListItems();
+        await GetUserRolesAsync(id);
 
         return Page();
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        InitSelectListItems();
+        await GetUserRolesAsync(UpUser.Id);
 
         ValidationResult validationCheck = new EditUserCommandValidator().Validate(UpUser);
         validationCheck.AddToModelState(ModelState, nameof(UpUser));
@@ -82,8 +82,9 @@ public class EditModel : PageModel
         return Page();
     }
 
-    public void InitSelectListItems()
+    public async Task GetUserRolesAsync(string id)
     {
-        URoles = new SelectList(SecurityConstants.GetRoles());
+        List<string> usrRoles = await _mediator.Send(new GetRolesOfUserQuery() { Id = id });
+        URoles = usrRoles;
     }
 }

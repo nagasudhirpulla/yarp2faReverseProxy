@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using WebApp.Extensions;
 
 namespace WebApp.Pages.Users;
@@ -73,7 +72,7 @@ public class DeleteRoleModel(ILogger<DeleteRoleModel> logger, IMediator mediator
         if (res.Succeeded)
         {
             _logger.LogInformation("User role delete operation successful");
-            return RedirectToPage($"./Details", new { id = DeleteRoleCmd.UserId }).WithSuccess("User role delete done");
+            return RedirectToPage($"./Edit", new { id = DeleteRoleCmd.UserId }).WithSuccess("User role delete done");
         }
 
         foreach (var error in res.Errors)

@@ -65,7 +65,7 @@ public class AddRoleModel(ILogger<AddRoleModel> logger, IMediator mediator, ICur
         if (res.Succeeded)
         {
             _logger.LogInformation("User role addition operation successful");
-            return RedirectToPage($"./Details", new { id = AddRoleCmd.UserId }).WithSuccess("User role addition done");
+            return RedirectToPage($"./Edit", new { id = AddRoleCmd.UserId }).WithSuccess("User role addition done");
         }
 
         foreach (var error in res.Errors)
