@@ -1,7 +1,8 @@
-## TODOs
-* show roles list in user edit page with delete button that redirects to delete user role page and add user role button that redirects user to add user role page
-* add user role page
-* delete user role page
+## Introduction
+* This is a dotnet application that can act as a reverse proxy
+* Users can be enforced to login before accessing the web applications behind the reverse proxy
+* The reverse proxy is based on an opensource library named YARP
+* The user management, authentication, access policies etc., are based on ASP.NET Core Identity framework
 
 ## Links
 * Manage roles in dotnet - https://csharp-video-tutorials.blogspot.com/2019/07/get-list-of-roles-in-aspnet-core.html
