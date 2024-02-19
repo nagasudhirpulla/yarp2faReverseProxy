@@ -7,3 +7,4 @@
 ## Links
 * Manage roles in dotnet - https://csharp-video-tutorials.blogspot.com/2019/07/get-list-of-roles-in-aspnet-core.html
 * Configure policy based role checks - https://learn.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-8.0#policy-based-role-checks
+* Deserialize JSON in dotnet - https://www.nuget.org/packages/System.Text.Json

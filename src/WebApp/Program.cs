@@ -4,6 +4,7 @@ using Application.Users.Commands.SeedUsers;
 using Infra;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using WebApp;
 using WebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +20,22 @@ builder.Services.AddRazorPages()
     .AddRazorRuntimeCompilation();
 
 builder.Services.AddAuthorizationBuilder()
-    .AddPolicy("gatewayAccess", policy => policy.RequireAuthenticatedUser());
+    .AddPolicy("anyUser", policy => policy.RequireAuthenticatedUser());
+
+// create authorization policies from appsettings JSON
+RolePolicies configPolicies = builder.Configuration.GetSection("RolePolicies").Get<RolePolicies>() ?? [];
+if (!configPolicies.Any())
+{ Console.WriteLine("No authorization policies parsed from configuration JSON"); }
+
+List<string> reservedPolicyNames = ["anyUser", "anonymous", "default"];
+foreach ((string policyName, List<string> rolesForPolicy) in configPolicies)
+{
+    // donot create policies for reserved names
+    if (reservedPolicyNames.Any(s => s.Equals(policyName, StringComparison.CurrentCultureIgnoreCase)))
+    { continue; }
+    // create authorization policy
+    builder.Services.AddAuthorizationBuilder().AddPolicy(policyName, policy => policy.RequireRole(rolesForPolicy));
+}
 
 builder.Services.AddReverseProxy().LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 
